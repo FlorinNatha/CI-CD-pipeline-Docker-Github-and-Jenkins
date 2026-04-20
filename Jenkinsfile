@@ -1,18 +1,22 @@
 pipeline {
     //pipeline eka run wena OS eka, AWS EC2 instance ekak wage ew that agent ekta danne.. methan any kiyla damma
     agent any 
+
+    environment {
+        IMAGE_NAME = "Florin/nodeapp-cuban"
+    }
     
     stages { 
         stage('SCM Checkout') {
             steps {
                 retry(3) {
-                    git branch: 'main', url: 'https://github.com/FlorinNatha/GitHub-Docker-and-Jenkins-CI-CD-Pipeline.git'
+                    git branch: 'main', url: 'https://github.com/FlorinNatha/CI-CD-pipeline-Docker-Github-and-Jenkins.git'
                 }
             }
         }
         stage('Build Docker Image') {
             steps {  
-                bat 'docker build -t Florin/nodeapp-cuban:%BUILD_NUMBER% .'
+                bat 'docker build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
             }
         }
         stage('Login to Docker Hub') {
@@ -26,7 +30,7 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                bat 'docker push Florin/nodeapp-cuban:%BUILD_NUMBER%'
+                bat "docker push %IMAGE_NAME%:%BUILD_NUMBER%"
             }
         }
     }
