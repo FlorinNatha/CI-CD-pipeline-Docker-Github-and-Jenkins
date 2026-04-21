@@ -1,5 +1,5 @@
 # Use the latest version of the Node.js image as the base image
-FROM node:latest
+FROM node:20-alpine
 
 # Set the working directory inside the container to /usr/src/app
 WORKDIR /usr/src/app  
