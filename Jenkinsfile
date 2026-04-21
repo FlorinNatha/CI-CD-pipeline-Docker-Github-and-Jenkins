@@ -3,7 +3,7 @@ pipeline {
     agent any 
 
     environment {
-        IMAGE_NAME = "Florin/nodeapp-cuban"
+        IMAGE_NAME = "nathashaflorin/nodeapp-cuban"
     }
     
     stages { 
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'test-dockerhubpassword', variable: 'test-dockerhubpass')]) {
                     script {
-                        bat "docker login -u Florin -p %test-dockerhubpass%"
+                        bat "docker login -u nathashaflorin -p %test-dockerhubpass%"
                     }
                 }
             }
