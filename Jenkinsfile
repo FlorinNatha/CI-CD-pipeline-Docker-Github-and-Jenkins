@@ -30,7 +30,9 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                bat "docker push %IMAGE_NAME%:%BUILD_NUMBER%"
+                retry(3) { 
+                    bat "docker push %IMAGE_NAME%:%BUILD_NUMBER%"   
+                }    
             }
         }
     }
